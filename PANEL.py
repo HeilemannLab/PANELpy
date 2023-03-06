@@ -83,8 +83,3 @@ def caculate_global(rFRCmap):
     absolute_value = np.array((min_FV, max_FV, resolution, rFRC), dtype = 'float32')
     return absolute_value
                 
-
-
-    
-    
-    

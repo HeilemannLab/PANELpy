@@ -48,16 +48,7 @@ def calc_frc(items):
             resolution = twosigma_resolution * (3 / 2) * (3 / 2)
         # elif not math.isnan(fixed_resolution) and not math.isinf(fixed_resolution)and not(fixed_resolution < 0):
         #     resolution = fixed_resolution
-        if resolution == None:
-            resolution = 0
-        resolutions = [resolution]
-        xy_coordinates = [(xstart, ystart)]
-        for i in range(xstart, xstart + skip):
-            for j in range(ystart, ystart + skip):
-                resolutions.append(resolution)
-                xy_coordinates.append((i,j))
-        print("inside", resolutions, xy_coordinates)
-        return [resolutions, xy_coordinates]
+        return resolution
 
 
 def fSNRmap(stack, pixelsize = 30.25, backgroundIntensity = 5, skip = 1, blockSize = 64, \
@@ -102,30 +93,13 @@ def fSNRmap(stack, pixelsize = 30.25, backgroundIntensity = 5, skip = 1, blockSi
     items = [(xstart, ystart, blockSize, skip, pixelsize, correctDrift, image1_pad, image2_pad, BI)
              for xstart in xstarts for ystart in ystarts]
 
-    # collect resolution per window and window xy coordinates
-    windows_resolution, windows_xy = [], []
+    # collect resolution per window
+    windows_resolution = []
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for item, rfrc_calculation in zip(items, executor.map(calc_frc, items)):
-            print("outside", rfrc_calculation)
-            resolutions, xy_coordinates = rfrc_calculation
-            windows_resolution.extend(resolutions)
-            windows_xy.extend(xy_coordinates)
+            windows_resolution.append(rfrc_calculation)
 
-    # # fill with skip values
-    # windows_resolution_filled = windows_resolution
-    # windows_xy_filled = windows_xy
-    # if skip > 0:
-    #     for resolution, windows_xy in zip(windows_resolution, windows_xy):
-    #         for i in range(windows_xy[0]+skip):
-    #             for j in range(windows_xy[1]+skip):
-    #                 windows_resolution_filled.append(resolution)
-    #                 windows_xy_filled.append((i, j))
-
-    # convert rfrc window resolutions to a 2D numpy array
-    # rFRC_map = np.zeros((w, h), dtype='float32')
-    # rFRC_map[tuple(zip(*windows_xy_filled))] = windows_resolution_filled
     rFRC_map = np.reshape(windows_resolution, (w, h))
-    # rFRC_map[np.isnan(rFRC_map)] = 0.
     rFRC_map[rFRC_map == None] = 0.
 
     if amedianfilter:
