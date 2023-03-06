@@ -2,13 +2,10 @@
 Apply rFRC to matching image pairs in two directories. Images within directories must have matching names.
 """
 
-# TODO save global info as file
+
 # TODO wiki px size in nm
-# TODO load images from two directories
-# TODO work with png images
 # TODO work with 16 bit images (background value?, does rfrc map look reasonable)
 # TODO outputs, PANEL map with confocal img?
-# TODO speed up calculation by parallelization
 
 
 import numpy as np
@@ -28,7 +25,7 @@ DIR_B = r"D:\Chemie_phd\_data\STED_denoising\rFRC_testdata\highpair_small2_png_8
 # image format, only files with that type are red
 IMG_FORMAT = "png"
 # define save directory, folder is automatically created
-SAVE_DIR = r"D:\Chemie_phd\_data\STED_denoising\rFRC_testdata\test2"
+SAVE_DIR = r"D:\Chemie_phd\_data\STED_denoising\rFRC_testdata\test_skip1_multi_2"
 # background value in rFRC
 BACKGROUND = 15
 # px size in nm

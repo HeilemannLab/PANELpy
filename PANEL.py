@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from fSNR.fSNRmap import fSNRmap
+from fSNR.fSNRmap_speedup import fSNRmap
 from Utils.otsu import *
 import datetime
 
