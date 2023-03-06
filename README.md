@@ -8,6 +8,11 @@
 [![GitHub stars](https://img.shields.io/github/stars/WeisongZhao/PANELpy?style=social)](https://github.com/WeisongZhao/PANELpy/) 
 [![GitHub forks](https://img.shields.io/github/forks/WeisongZhao/PANELpy?style=social)](https://github.com/WeisongZhao/PANELpy/)
 
+## fork adaptations
+- add run_rFRC.py: rFRC is applied to all image files in directory (vs only one image), matching images must be in two directories (vs stack), can handle tif and png files (vs tif only)
+- speed up calculation by adding multiprocessing, only compatible with skip=1!
+
+In order to run the adapted code, edit variables in [run_rFRC.py](https://github.com/HeilemannLab/PANELpy/blob/data_loading/run_rFRC.py) and execute this file.
 
 <p>
 <h1 align="center">PANEL<font color="#b07219">py</font></h1>
@@ -16,9 +21,6 @@
 </p>
 <br>
 
-fork adaptations
-- add run_rFRC.py: rFRC is applied to all image files in directory (vs only one image), matching images must be in two directories (vs stack), can handle tif and png files (vs tif only)
-- speed up calculation by adding multiprocessing, only compatible with skip=1!
 
 rFRC (rolling Fourier ring correlation) mapping and simplified PANEL (Pixel-level ANalysis of Error Locations) (w/o RSM) pinpointing. This repository will be in continued development. The full PANEL can be found in [PANELM](https://github.com/WeisongZhao/PANELM). If you find this useful, please cite the corresponding publication. [Weisong Zhao et al. Quantitatively mapping local quality of super-resolution microscopy by rolling Fourier ring correlation, <!-- Nature Biotechnology -->, X, XXX-XXX (2022)](https://doi.org/10.1101/2022.12.01.518675). More details on [demo.ipynb](https://github.com/WeisongZhao/PANELpy/blob/main/demo.ipynb). If it helps your research, please cite our work in your publications. 
 
